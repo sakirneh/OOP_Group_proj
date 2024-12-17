@@ -1,5 +1,7 @@
 package bcu.cmp5332.bookingsystem.commands;
 
+import java.util.Scanner;
+
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
@@ -21,5 +23,9 @@ public interface Command {
 
     
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
-    
+    	Scanner in = new Scanner(System.in);
+    	
+    	String input = in.nextLine();
+    	
+    	
 }
