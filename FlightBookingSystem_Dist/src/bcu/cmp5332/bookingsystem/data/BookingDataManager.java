@@ -65,8 +65,8 @@ public class BookingDataManager implements DataManager {
     		
             for(Customer customer : fbs.getCustomers()) {
             	
-            	if(customer.getBooking().size() > 0) {
-            		for(Booking booking : customer.getBooking()) {
+            	if(customer.getBookings().size() > 0) {
+            		for(Booking booking : customer.getBookings()) {
             			out.print(booking.getCustomer().getID() + SEPARATOR);
                         out.print(booking.getCustomer().getName() + SEPARATOR);
                         out.print(booking.getCustomer().getPhone() + SEPARATOR);

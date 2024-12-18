@@ -30,6 +30,7 @@ public class AddBooking implements Command{
 		}
 		Booking booking = new Booking(customer, flight, flightBookingSystem.getSystemDate());
 		customer.addBooking(booking);
+		flight.addPassenger(customer);
 		System.out.println("A new Booking has been made for "+ customer.getName());
 	}
 
