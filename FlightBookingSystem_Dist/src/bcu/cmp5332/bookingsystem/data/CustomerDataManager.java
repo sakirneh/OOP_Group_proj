@@ -22,12 +22,12 @@ public class CustomerDataManager implements DataManager {
         // TODO: implementation here
     	File customerFile = new File(RESOURCE);
     	BufferedReader in = new BufferedReader(new FileReader(customerFile));
-    	
+    	String lineOut = "";
     	List<String> lines = in.lines().toList();
 		
 		try {
 			for(String line : lines) {
-				
+				lineOut = line;
 				String[] values = line.split(this.SEPARATOR);
 				Customer customer = new Customer(Integer.valueOf(values[0]), values[1], values[2]);
 				fbs.addCustomer(customer);
@@ -37,18 +37,21 @@ public class CustomerDataManager implements DataManager {
 		catch(IOException ex) {
 			System.out.println("File does not exist");
 		}
+		catch(NumberFormatException ex) {
+			throw new FlightBookingSystemException("Unable to parse customer, line" + lineOut);
+		}
     }
 
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
-    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
-            for (Customer customer : fbs.getCustomers()) {
-                out.print(customer.getID() + SEPARATOR);
-                out.print(customer.getName() + SEPARATOR);
-                out.print(customer.getPhone() + SEPARATOR);
-                out.println();
-            }
+        try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
+              for (Customer customer : fbs.getCustomers()) {
+                  out.print(customer.getID() + SEPARATOR);
+                  out.print(customer.getName() + SEPARATOR);
+                  out.print(customer.getPhone() + SEPARATOR);
+                  out.println();
+              }
         }
     }
 }
