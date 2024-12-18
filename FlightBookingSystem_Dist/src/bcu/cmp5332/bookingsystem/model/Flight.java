@@ -71,6 +71,10 @@ public class Flight {
     public List<Customer> getPassengers() {
         return new ArrayList<>(passengers);
     }
+    
+    public void removePassengers(Customer customer) {
+    	this.passengers.remove(customer);
+    }
 	
     public String getDetailsShort() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");

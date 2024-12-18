@@ -12,6 +12,8 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
+    
+    
     private final List<Booking> bookings = new ArrayList<>();
     
     // TODO: implement constructor here
@@ -46,9 +48,6 @@ public class Customer {
     	return this.phone;
     }
     
-    public List getBookings(){
-    	return this.bookings;
-    }
     
     public String getDetailsShort() {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
@@ -61,9 +60,21 @@ public class Customer {
     	bookings.add(booking);
     }
     
-    public List<Booking> getBooking() {
+    public List<Booking> getBookings() {
     	
     	return bookings;
+    	
+    }
+    
+    public void removeBooking(Customer customer, Flight flight) {
+    	Booking booking = null;
+    	for(Booking tempBook : customer.getBookings()) {
+    		if(customer == tempBook.getCustomer()) {
+    			booking = tempBook;
+    		}
+    	}
+    	bookings.remove(booking);
+		flight.removePassengers(customer);
     	
     }
 }
