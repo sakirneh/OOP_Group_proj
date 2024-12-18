@@ -45,15 +45,13 @@ public class CustomerDataManager implements DataManager {
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
-    	
-    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
-            for (Customer customer : fbs.getCustomers()) {
-                out.print(customer.getID() + SEPARATOR);
-                out.print(customer.getName() + SEPARATOR);
-                out.print(customer.getPhone() + SEPARATOR);
-
-                out.println();
-            }
+        try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
+              for (Customer customer : fbs.getCustomers()) {
+                  out.print(customer.getID() + SEPARATOR);
+                  out.print(customer.getName() + SEPARATOR);
+                  out.print(customer.getPhone() + SEPARATOR);
+                  out.println();
+              }
         }
     }
 }
