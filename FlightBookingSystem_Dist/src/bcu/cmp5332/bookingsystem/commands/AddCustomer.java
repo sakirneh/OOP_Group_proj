@@ -23,7 +23,7 @@ public class AddCustomer implements Command {
     	}
     	Customer customer = new Customer(customerID, name, phone);
     	flightBookingSystem.addCustomer(customer);
-    	System.out.println("Customer #" + customer.getName() + " added.");
+    	System.out.println("Customer # "+ "ID" + customerID + customer.getName() + " added.");
     	
     }
 }
