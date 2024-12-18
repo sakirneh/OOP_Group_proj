@@ -11,7 +11,7 @@ public class FlightBookingSystem {
     private final Map<Integer, Customer> customers = new TreeMap<>();
     private final Map<Integer, Flight> flights = new TreeMap<>();
     
-    private final Map<Customer, Flight> bookings = new TreeMap<>();
+    
 
     public LocalDate getSystemDate() {
         return systemDate;
@@ -58,6 +58,7 @@ public class FlightBookingSystem {
 
     public void addCustomer(Customer customer) {
         // TODO: implementation here
-    	customers.put(customer.getID(), customer);
+    	if(true)
+    		customers.put(customer.getID(), customer);
     }
 }

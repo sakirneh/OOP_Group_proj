@@ -23,12 +23,12 @@ public class CancelBooking implements Command{
 		if(fbs.getCustomerByID(this.customerID) != null && fbs.getFlightByID(this.flightID) != null) {
 			Customer customer = fbs.getCustomerByID(this.customerID);
 			Flight flight = fbs.getFlightByID(this.flightID);
-			customer.removeBooking(customer, flight);
-			System.out.println("Booking successfully cancelled for " + customer.getName())
+			customer.cancelBookingForFlight(customer, flight);
+			System.out.println("Booking successfully cancelled for " + customer.getName());
 			
 		}
 		else {
-			System.out.println("No existing booking for customer ID " + this.customerID + " and flight ID " + this.flightID);
+			throw new FlightBookingSystemException("No existing booking for customer ID " + this.customerID + " and flight ID " + this.flightID);
 		}
 	}
 	
