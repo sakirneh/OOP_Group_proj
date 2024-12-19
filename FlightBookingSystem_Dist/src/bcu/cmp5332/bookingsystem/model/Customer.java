@@ -75,8 +75,16 @@ public class Customer {
     
     
     
-    public void addBooking(Booking booking) {
+
+    public void addBooking(Booking booking) throws FlightBookingSystemException {
+
         // TODO: implementation here
+    	for(Booking tempBook : this.bookings) {
+    		if(booking.getFlight() == tempBook.getFlight()) {
+    			throw new FlightBookingSystemException("Cannot book multiple spaces per flight");
+    		}
+    	}
+    	
     	bookings.add(booking);
     }
     
@@ -86,10 +94,10 @@ public class Customer {
     	
     }
     
-    public void removeBooking(Customer customer, Flight flight) {
+    public void cancelBookingForFlight(Customer customer, Flight flight) {
     	Booking booking = null;
     	for(Booking tempBook : customer.getBookings()) {
-    		if(customer == tempBook.getCustomer()) {
+    		if(flight == tempBook.getFlight()) {
     			booking = tempBook;
     		}
     	}
