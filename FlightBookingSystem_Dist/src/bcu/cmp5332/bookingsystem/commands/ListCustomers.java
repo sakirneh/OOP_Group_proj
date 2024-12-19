@@ -14,7 +14,7 @@ public class ListCustomers implements Command {
 		// TODO Auto-generated method stub
 		List<Customer> customers = flightBookingSystem.getCustomers();
         for (Customer customer : customers) {
-            System.out.println(customer.getDetailsShort());
+            System.out.println(customer.getDetailsLong());
         }
         //System.out.println(flights.size() + " flight(s)");
 	}

@@ -47,6 +47,7 @@ public class BookingDataManager implements DataManager {
                     Flight flight = fbs.getFlightByID(id);
                     
                     Booking booking = new Booking(customer,flight,departureDate);
+                    flight.addPassenger(customer);
                     customer.addBooking(booking);
                     
                 } catch (NumberFormatException ex) {
