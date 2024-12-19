@@ -23,7 +23,9 @@ public class CancelBooking implements Command{
 		if(fbs.getCustomerByID(this.customerID) != null && fbs.getFlightByID(this.flightID) != null) {
 			Customer customer = fbs.getCustomerByID(this.customerID);
 			Flight flight = fbs.getFlightByID(this.flightID);
+      
 			customer.cancelBookingForFlight(customer, flight);
+
 			System.out.println("Booking successfully cancelled for " + customer.getName());
 			
 		}

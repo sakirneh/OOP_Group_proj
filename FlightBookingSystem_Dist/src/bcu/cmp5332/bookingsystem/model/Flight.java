@@ -72,9 +72,7 @@ public class Flight {
         return new ArrayList<>(passengers);
     }
     
-    public void removePassengers(Customer customer) {
-    	this.passengers.remove(customer);
-    }
+    
 	
     public String getDetailsShort() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
@@ -84,10 +82,28 @@ public class Flight {
 
     public String getDetailsLong() {
         // TODO: implementation here
-        return null;
+    	
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    	String out = "Flight #" + this.id 
+    			+"\n"+"Flight No: " + this.flightNumber
+    			+"\n"+"Origin: " + this.origin
+    			+"\n"+"Destination: "+ this.destination
+    			+"\n"+"Departure Date: "+ this.departureDate.format(dtf)
+    			+"\n"+"---------------------------"
+    			+"\n"+"Passengers:"+"\n";
+    	String customerList = "";
+    	for(Customer customer : this.getPassengers()) {
+    		out = out + customerList.concat(customer.getDetailsShort()).concat("\n");
+    	}
+    	
+        return out;
     }
     
     public void addPassenger(Customer passenger) {
-        
+        this.passengers.add(passenger);
+    }
+    
+    public void removePassengers(Customer customer) {
+    	this.passengers.remove(customer);
     }
 }

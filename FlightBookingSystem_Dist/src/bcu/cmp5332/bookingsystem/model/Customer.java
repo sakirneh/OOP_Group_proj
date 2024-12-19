@@ -51,11 +51,33 @@ public class Customer {
     
     public String getDetailsShort() {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-        return "Customer #" + this.id + " - " +" Name: " 
-                + this.name + "-"+ " Phone: " + this.phone;
+    	String out = "Customer #" + this.id + " - " +" Name: " 
+                + this.name + " - "+ "Phone: " + this.phone;
+        return out;
     }
     
+    public String getDetailsLong() {
+    	
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    	String out ="Customer #" +this.id
+    			+"\n"+"Name: " + this.name
+    			+"\n"+"Phone: " + this.phone
+    			+"\n"+"---------------------------"
+    			+"\n"+"Bookings:"+"\n";
+    	
+    	String bookingOut = "";
+    	for(Booking booking : this.getBookings()) {
+    		out = out + "Booking date: " +bookingOut.concat(booking.getDate().format(dtf) + " for ")
+    		.concat(booking.getFlight().getDetailsShort() + "\n");
+    	}
+    	return out;
+    }
+    
+    
+    
+
     public void addBooking(Booking booking) throws FlightBookingSystemException {
+
         // TODO: implementation here
     	for(Booking tempBook : this.bookings) {
     		if(booking.getFlight() == tempBook.getFlight()) {
