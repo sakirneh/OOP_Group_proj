@@ -58,7 +58,7 @@ public class FlightBookingSystem {
 
     public void addCustomer(Customer customer) {
         // TODO: implementation here
-    	if(true)
-    		customers.put(customer.getID(), customer);
+    	
+    	customers.put(customer.getID(), customer);
     }
 }

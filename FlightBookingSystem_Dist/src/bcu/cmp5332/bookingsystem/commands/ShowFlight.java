@@ -14,14 +14,16 @@ public class ShowFlight implements Command{
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
 		// TODO Auto-generated method stub
+		//prints short details about flights
 		if(flightBookingSystem.getFlights().size() >0 ) {
 			flight = flightBookingSystem.getFlightByID(flightID);
+			System.out.println(flight.getDetailsShort());
 		}
 		else {
-			System.out.println("There are no flights available with " + this.flightID + " id");
+			throw new FlightBookingSystemException("There are no flights available with " + this.flightID + " id");
 		}
 		
-		System.out.println(flight.getDetailsShort());
+		
 		
 	}
 

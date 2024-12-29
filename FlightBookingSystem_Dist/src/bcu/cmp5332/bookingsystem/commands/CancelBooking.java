@@ -19,12 +19,16 @@ public class CancelBooking implements Command{
 	@Override
 	public void execute(FlightBookingSystem fbs) throws FlightBookingSystemException {
 		// TODO Auto-generated method stub
-		
+		/*
+		 * 
+		 * check if customer exists and if flight
+		 * call customer cancelBookingForFlight method
+		*/
 		if(fbs.getCustomerByID(this.customerID) != null && fbs.getFlightByID(this.flightID) != null) {
 			Customer customer = fbs.getCustomerByID(this.customerID);
 			Flight flight = fbs.getFlightByID(this.flightID);
       
-			customer.cancelBookingForFlight(customer, flight);
+			customer.cancelBookingForFlight(flight);
 
 			System.out.println("Booking successfully cancelled for " + customer.getName());
 			

@@ -53,5 +53,8 @@ public class CustomerDataManager implements DataManager {
                   out.println();
               }
         }
+        catch(IOException ex) {
+        	throw new IOException("The file does not exist or is corrupted");
+        }
     }
 }

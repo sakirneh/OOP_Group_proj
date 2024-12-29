@@ -79,13 +79,15 @@ public class Customer {
     public void addBooking(Booking booking) throws FlightBookingSystemException {
 
         // TODO: implementation here
-    	for(Booking tempBook : this.bookings) {
-    		if(booking.getFlight() == tempBook.getFlight()) {
-    			throw new FlightBookingSystemException("Cannot book multiple spaces per flight");
-    		}
-    	}
     	
-    	bookings.add(booking);
+    	
+    	// if booking exists throw exception that customer already has a booking for the flight
+    	if(this.bookings.contains(booking)) {
+    		throw new FlightBookingSystemException(booking.getCustomer().getName() + " Already has a booking for flight ID: " + booking.getFlight().getId());
+    	}
+    	else {
+    		this.bookings.add(booking);
+    	}
     }
     
     public List<Booking> getBookings() {
@@ -94,15 +96,32 @@ public class Customer {
     	
     }
     
-    public void cancelBookingForFlight(Customer customer, Flight flight) {
+    public void cancelBookingForFlight(Flight flight) throws FlightBookingSystemException {
+    	/* 
+    	 * iterates over each booking and checks if any booking has the flight 
+    	 * that was passed to cancel.
+    	 * 
+    	 * then if the customer has a booking for that flight,
+    	 * remove passenger from the flight list and remove booking from bookings
+    	 */
+    	
+    	
+    	
     	Booking booking = null;
-    	for(Booking tempBook : customer.getBookings()) {
-    		if(flight == tempBook.getFlight()) {
-    			booking = tempBook;
-    		}
-    	}
-    	bookings.remove(booking);
-		flight.removePassengers(customer);
+		for(Booking tempBook : this.getBookings()) {
+			if(flight == tempBook.getFlight()) {
+				booking = tempBook;
+				break;
+			}
+		}
+		
+		if(this.getBookings().contains(booking)) {
+			flight.removePassengers(this);
+	    	bookings.remove(booking);
+		}
+		else {
+			throw new FlightBookingSystemException(this.getName() + " Does not have a booking for flight ID: " + flight.getId());
+		}
     	
     }
 }

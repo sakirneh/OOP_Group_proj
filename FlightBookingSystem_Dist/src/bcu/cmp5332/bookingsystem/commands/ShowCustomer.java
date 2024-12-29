@@ -15,14 +15,15 @@ public class ShowCustomer implements Command{
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
 		// TODO Auto-generated method stub
-		
+		//prints short details about customers
 		if(flightBookingSystem.getCustomers().size() >1) {
 			customer = flightBookingSystem.getCustomerByID(customerID);
+			System.out.println(customer.getDetailsShort());
 		}
 		else {
-			System.out.println("There are no customers with Id " + this.customerID);
+			throw new FlightBookingSystemException("There are no customers with Id " + this.customerID);
 		}
-		System.out.println(customer.getDetailsShort());
+		
 	}
 
 }

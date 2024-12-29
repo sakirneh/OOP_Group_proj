@@ -54,8 +54,13 @@ public class BookingDataManager implements DataManager {
                     throw new FlightBookingSystemException("Unable to parse book id " + properties[0] + " on line " + line_idx
                         + "\nError: " + ex);
                 }
+                
                 line_idx++;
             }
+            
+        }
+    	catch(IOException ex) {
+        	throw new IOException("The file does not exist or is corrupted");
         }
     }
 
@@ -84,6 +89,9 @@ public class BookingDataManager implements DataManager {
             	
             	
             }
+        }
+    	catch(IOException ex) {
+        	throw new IOException("The file does not exist or is corrupted");
         }
     }
     

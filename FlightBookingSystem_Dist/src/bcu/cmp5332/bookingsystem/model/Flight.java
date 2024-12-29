@@ -99,11 +99,26 @@ public class Flight {
         return out;
     }
     
-    public void addPassenger(Customer passenger) {
-        this.passengers.add(passenger);
+    public void addPassenger(Customer passenger) throws FlightBookingSystemException{
+    	//this.passengers.add(passenger);
+    	
+    	if(this.getPassengers().contains(passenger)){
+			throw new FlightBookingSystemException("Passenger " + passenger.getName() + " is already present in the flight's list of passengers");
+		}
+		else {
+			this.passengers.add(passenger);
+		}
+    	
     }
     
-    public void removePassengers(Customer customer) {
-    	this.passengers.remove(customer);
+    public void removePassengers(Customer passenger) throws FlightBookingSystemException {
+    	//this.passengers.remove(customer);
+    	
+    	if(this.getPassengers().contains(passenger)) {
+    		this.passengers.remove(passenger);
+    	}
+    	else {
+    		throw new FlightBookingSystemException("Passenger " + passenger.getName() + " is not in the flights list of passengers");
+    	}
     }
 }

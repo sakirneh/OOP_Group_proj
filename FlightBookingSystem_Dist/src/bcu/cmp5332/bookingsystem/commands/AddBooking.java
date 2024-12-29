@@ -23,17 +23,39 @@ public class AddBooking implements Command{
 	@Override
 	public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
 		// TODO Auto-generated method stub
+		/*
 		
-		if(flightBookingSystem.getCustomers().size() >0) {
-			customer = flightBookingSystem.getCustomerByID(customerID);
-			flight = flightBookingSystem.getFlightByID(flightID);
+		check if the customer list is not empty
+		get customer and flight obj by id
+		create new booking object
+		
+		try to add the booking to customer booking list
+		and passenger to flight passenger list
+		
+		*/
+		
+		try{
+			if(flightBookingSystem.getCustomers().size() >0) {
+				customer = flightBookingSystem.getCustomerByID(customerID);
+				flight = flightBookingSystem.getFlightByID(flightID);
+				Booking booking = new Booking(customer, flight, flightBookingSystem.getSystemDate());
+				
+				try {
+					customer.addBooking(booking);
+					flight.addPassenger(customer);
+					System.out.println("A new Booking has been made for "+ customer.getName());
+					System.out.println(customer.getName() + " was added to flight " + flight.getId());
+				}
+				catch(FlightBookingSystemException ex){
+					System.out.println(ex.getMessage());
+				}
+
+			}
+			
 		}
-		Booking booking = new Booking(customer, flight, flightBookingSystem.getSystemDate());
-		
-		customer.addBooking(booking);
-		flight.addPassenger(customer);
-		
-		System.out.println("A new Booking has been made for "+ customer.getName());
+		catch(IllegalArgumentException ex) {
+			System.out.println("The customer list is empty");
+		}
 	}
 
 }
