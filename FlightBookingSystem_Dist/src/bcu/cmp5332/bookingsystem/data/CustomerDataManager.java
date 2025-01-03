@@ -15,7 +15,8 @@ import java.util.List;
 
 public class CustomerDataManager implements DataManager {
 
-    private final String RESOURCE = "./resources/data/customers.txt";
+    //private final String RESOURCE = "./resources/data/customers.txt";
+    private final String RESOURCE = "./resources/data/CustomerTest.txt";
     
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
@@ -29,7 +30,12 @@ public class CustomerDataManager implements DataManager {
 			for(String line : lines) {
 				lineOut = line;
 				String[] values = line.split(this.SEPARATOR);
-				Customer customer = new Customer(Integer.valueOf(values[0]), values[1], values[2]);
+				for(String value : values) {
+					if(value.isBlank()) {
+						throw new FlightBookingSystemException("Customer data is missing in line : " + lineOut);
+					}
+				}
+				Customer customer = new Customer(Integer.valueOf(values[0]), values[1], values[2],values[3]);
 				fbs.addCustomer(customer);
 			}
 			in.close();
@@ -39,6 +45,9 @@ public class CustomerDataManager implements DataManager {
 		}
 		catch(NumberFormatException ex) {
 			throw new FlightBookingSystemException("Unable to parse customer, line" + lineOut);
+		}
+		catch(FlightBookingSystemException ex) {
+			System.out.println(ex.getMessage());
 		}
     }
 
@@ -50,11 +59,17 @@ public class CustomerDataManager implements DataManager {
                   out.print(customer.getID() + SEPARATOR);
                   out.print(customer.getName() + SEPARATOR);
                   out.print(customer.getPhone() + SEPARATOR);
+                  out.print(customer.getEmail() + SEPARATOR);
                   out.println();
               }
         }
         catch(IOException ex) {
         	throw new IOException("The file does not exist or is corrupted");
         }
+        catch(ArrayIndexOutOfBoundsException ex) {
+        	throw new ArrayIndexOutOfBoundsException("Some customer data is missing");
+        }
     }
+    
+    
 }

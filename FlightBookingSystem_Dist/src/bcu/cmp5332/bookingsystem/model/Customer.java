@@ -12,15 +12,17 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
+    private String email;
     
     
     private final List<Booking> bookings = new ArrayList<>();
     
     // TODO: implement constructor here
-    public Customer(int id, String name, String phoneNum) {
+    public Customer(int id, String name, String phoneNum, String email) {
     	this.id = id;
     	this.name = name;
     	this.phone = phoneNum;
+    	this.email = email;
     	
     }
     
@@ -46,6 +48,14 @@ public class Customer {
     
     public String getPhone() {
     	return this.phone;
+    }
+    
+    public String getEmail() {
+    	return this.email;
+    }
+    
+    public void setEmail(String email) {
+    	this.email = email;
     }
     
     

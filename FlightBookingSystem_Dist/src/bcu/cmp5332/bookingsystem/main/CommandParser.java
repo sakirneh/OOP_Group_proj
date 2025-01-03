@@ -34,10 +34,17 @@ public class CommandParser {
                 String origin = reader.readLine();
                 System.out.print("Destination: ");
                 String destination = reader.readLine();
+                
+                System.out.print("Seat Capacity: ");
+                String seatCapacity = reader.readLine();
+                
+                System.out.print("Price: ");
+                String price = reader.readLine();
 
                 LocalDate departureDate = parseDateWithAttempts(reader);
 
-                return new AddFlight(flighNumber, origin, destination, departureDate);
+                return new AddFlight(flighNumber, origin, destination, departureDate,Integer.valueOf(seatCapacity), Float.valueOf(price));
+                
             } else if (cmd.equals("addcustomer")) {
             	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.print("Name: ");
@@ -45,8 +52,11 @@ public class CommandParser {
                 
                 System.out.print("Phone: ");
                 String phoneNum = reader.readLine();
+                
+                System.out.print("Phone: ");
+                String email = reader.readLine();
 
-                return new AddCustomer(name, phoneNum);
+                return new AddCustomer(name, phoneNum,email);
             } else if (cmd.equals("loadgui")) {
                 return new LoadGUI();
             } else if (parts.length == 1) {

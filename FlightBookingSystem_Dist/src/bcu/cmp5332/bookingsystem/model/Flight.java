@@ -17,8 +17,12 @@ public class Flight {
     private LocalDate departureDate;
 
     private final Set<Customer> passengers;
+    
+   //50-59%
+    private int seatCapacity;
+    private float price;
 
-    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate) {
+    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate, int seatCapacity, float price) {
         this.id = id;
         this.flightNumber = flightNumber;
         this.origin = origin;
@@ -26,6 +30,9 @@ public class Flight {
         this.departureDate = departureDate;
         
         passengers = new HashSet<>();
+        
+        this.seatCapacity = seatCapacity;
+        this.price = price;
     }
 
     public int getId() {
@@ -72,6 +79,22 @@ public class Flight {
         return new ArrayList<>(passengers);
     }
     
+    public int getSeatCapacity() {
+    	return this.seatCapacity;
+    }
+    
+    public void setSeatCapacity(int seatCapacity) {
+    	this.seatCapacity = seatCapacity;
+    }
+    
+    public Float getPrice() {
+    	return this.price;
+    }
+    
+    public void setPrice(Float price) {
+    	this.price = price;
+    }
+    
     
 	
     public String getDetailsShort() {
@@ -90,7 +113,7 @@ public class Flight {
     			+"\n"+"Destination: "+ this.destination
     			+"\n"+"Departure Date: "+ this.departureDate.format(dtf)
     			+"\n"+"---------------------------"
-    			+"\n"+"Passengers:"+"\n";
+    			+"\n"+"Passengers: "+ " Capacity: "+ this.seatCapacity +"\n";
     	String customerList = "";
     	for(Customer customer : this.getPassengers()) {
     		out = out + customerList.concat(customer.getDetailsShort()).concat("\n");

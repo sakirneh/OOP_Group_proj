@@ -18,7 +18,8 @@ import java.util.Scanner;
 
 public class BookingDataManager implements DataManager {
     
-    public final String RESOURCE = "./resources/data/bookings.txt";
+    //public final String RESOURCE = "./resources/data/bookings.txt";
+	public final String RESOURCE = "./resources/data/BookingTest.txt";
 
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {

@@ -11,12 +11,19 @@ public class AddFlight implements  Command {
     private final String origin;
     private final String destination;
     private final LocalDate departureDate;
-
-    public AddFlight(String flightNumber, String origin, String destination, LocalDate departureDate) {
+    
+    //50-59%
+    private int seatCapacity;
+    private Float price;
+    
+    public AddFlight(String flightNumber, String origin, String destination, LocalDate departureDate, int seatCapacity, Float price) {
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
+        
+        this.seatCapacity = seatCapacity;
+        this.price = price;
     }
     
     @Override
@@ -32,10 +39,12 @@ public class AddFlight implements  Command {
         if (flightBookingSystem.getFlights().size() > 0) {
             int lastIndex = flightBookingSystem.getFlights().size() - 1;
             maxId = flightBookingSystem.getFlights().get(lastIndex).getId();
+            
+            Flight flight = new Flight(++maxId, this.flightNumber, this.origin, this.destination, this.departureDate,this.seatCapacity,this.price);
+            flightBookingSystem.addFlight(flight);
+            System.out.println("Flight #" + flight.getId() + " added.");
         }
         
-        Flight flight = new Flight(++maxId, flightNumber, origin, destination, departureDate);
-        flightBookingSystem.addFlight(flight);
-        System.out.println("Flight #" + flight.getId() + " added.");
+        
     }
 }

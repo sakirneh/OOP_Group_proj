@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 public class FlightDataManager implements DataManager {
     
-    private final String RESOURCE = "./resources/data/flights.txt";
+    //private final String RESOURCE = "./resources/data/flights.txt";
+    private final String RESOURCE = "./resources/data/FlightTest.txt";
     
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
@@ -21,21 +22,30 @@ public class FlightDataManager implements DataManager {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] properties = line.split(SEPARATOR, -1);
+                
                 try {
+                	
+                	
                     int id = Integer.parseInt(properties[0]);
                     String flightNumber = properties[1];
                     String origin = properties[2];
                     String destination = properties[3];
                     LocalDate departureDate = LocalDate.parse(properties[4]);
-                    Flight flight = new Flight(id, flightNumber, origin, destination, departureDate);
+                    String seatCapacity = properties[5];
+                    String price = properties[6];
+                    Flight flight = new Flight(id, flightNumber, origin, destination, departureDate,Integer.parseInt(seatCapacity),Float.parseFloat(price));
                     fbs.addFlight(flight);
                 } catch (NumberFormatException ex) {
                     throw new FlightBookingSystemException("Unable to parse book id " + properties[0] + " on line " + line_idx
                         + "\nError: " + ex);
                 }
+                catch(FlightBookingSystemException ex) {
+                	System.out.println(ex.getMessage());
+                }
                 line_idx++;
             }
         }
+        
     }
     
     @Override
@@ -47,6 +57,8 @@ public class FlightDataManager implements DataManager {
                 out.print(flight.getOrigin() + SEPARATOR);
                 out.print(flight.getDestination() + SEPARATOR);
                 out.print(flight.getDepartureDate() + SEPARATOR);
+                out.print(flight.getSeatCapacity() + SEPARATOR);
+                out.print(flight.getPrice() + SEPARATOR);
                 out.println();
             }
         }
