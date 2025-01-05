@@ -5,6 +5,7 @@ import  org.junit.Test;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.data.*;
@@ -91,22 +92,36 @@ public class FlightTest {
 		flight.removePassengers(customer);
 		
 	}
-	
+	//if the file already has the same flight - illegalArgumentException exception is thrown, else store the flight correctly
 	@Test
-	public void testStoreFlight() throws FlightBookingSystemException, IOException {
+	public void testStoreFlight() throws FlightBookingSystemException, IOException, IllegalArgumentException {
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
 		float price = (float) 100.0;
-		Flight flight = new Flight(1, "LH2560","Birmingham", "Munich",departureDate,25,price);
+		//Flight flight = new Flight(1, "LH2560","Birmingham", "Munich",departureDate,25,price);
 		
-		FlightBookingSystem fbs = new FlightBookingSystem();
-		fbs.addFlight(flight);
+		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+		FlightBookingSystem fbs = fbsList.getLast();
 		
-		FlightBookingSystemData.store(fbs);
+		
+		FlightBookingSystemData.store(fbsList);
+		
+		List<FlightBookingSystem> testFbsList = FlightBookingSystemData.load();
+		FlightBookingSystem testFbs = testFbsList.getLast();
+		
+		Flight testFlight = testFbs.getFlightByID(1);
+		
+		String testString = "1LH2560BirminghamMunich2022-11-2525100.0";
+		
+		String flightString = testFlight.getId() + testFlight.getFlightNumber() + testFlight.getOrigin() + testFlight.getDestination() +testFlight.getDepartureDate() + testFlight.getSeatCapacity() + testFlight.getPrice();
+		
+		assertEquals(testString, flightString);
 	}
 	
+	//if the file has no flights, throw fbs exception and fail test
 	@Test
 	public void testLoadFlight() throws FlightBookingSystemException, IOException {
-		FlightBookingSystem fbs = FlightBookingSystemData.load();
+		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+		FlightBookingSystem fbs = fbsList.getLast();
 		
 		Flight flight = fbs.getFlightByID(1);
 		

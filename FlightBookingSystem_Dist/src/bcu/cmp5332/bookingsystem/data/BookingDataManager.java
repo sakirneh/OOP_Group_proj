@@ -6,20 +6,23 @@ import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
-import java.io.BufferedReader;
+
 import java.io.File;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class BookingDataManager implements DataManager {
     
-    //public final String RESOURCE = "./resources/data/bookings.txt";
-	public final String RESOURCE = "./resources/data/BookingTest.txt";
+    public String RESOURCE;
+	//public final String RESOURCE = "./resources/data/BookingTest.txt";
+    public BookingDataManager(String RESOURCE) {
+    	this.RESOURCE = RESOURCE;
+    }
 
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {

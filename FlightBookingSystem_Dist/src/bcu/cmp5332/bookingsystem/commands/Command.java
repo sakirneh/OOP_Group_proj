@@ -1,5 +1,6 @@
 package bcu.cmp5332.bookingsystem.commands;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -22,7 +23,7 @@ public interface Command {
         + "\texit                                      exits the program";
 
     
-    public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
+    public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException, IOException;
     	Scanner in = new Scanner(System.in);
     	
     	String input = in.nextLine();

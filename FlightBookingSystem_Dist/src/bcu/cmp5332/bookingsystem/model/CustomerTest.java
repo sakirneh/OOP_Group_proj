@@ -5,9 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
-
-
+import java.util.List;
 
 import org.junit.Test;
 import bcu.cmp5332.bookingsystem.data.*;
@@ -88,13 +86,15 @@ public class CustomerTest {
 	@Test
 	public void testCustomerStoreData() throws IOException, FlightBookingSystemException {
 		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
-		FlightBookingSystem fbs = new FlightBookingSystem();
+		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+		FlightBookingSystem fbs = fbsList.getLast();
 		
 		fbs.addCustomer(customer);
 		
-		FlightBookingSystemData.store(fbs);
+		FlightBookingSystemData.store(fbsList);
 		
-		FlightBookingSystem testFbs = FlightBookingSystemData.load();
+		List<FlightBookingSystem> testFbsList = FlightBookingSystemData.load();
+		FlightBookingSystem testFbs = testFbsList.getLast();
 		
 		Customer customerLoaded = testFbs.getCustomerByID(1);
 		
@@ -106,7 +106,8 @@ public class CustomerTest {
 	
 	@Test
 	public void testCustomerLoadData() throws FlightBookingSystemException, IOException {
-		FlightBookingSystem fbs = FlightBookingSystemData.load();
+		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+		FlightBookingSystem fbs = fbsList.getLast();
 		
 		Customer customer = fbs.getCustomerByID(1);
 		//Customer testCustomer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");

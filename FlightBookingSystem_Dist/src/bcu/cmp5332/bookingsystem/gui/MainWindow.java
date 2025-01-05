@@ -1,6 +1,7 @@
 package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
+import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.awt.event.ActionEvent;
@@ -41,11 +42,15 @@ public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem custDel;
 
     private FlightBookingSystem fbs;
+    private List<FlightBookingSystem> fbsList;
+    
+    
 
-    public MainWindow(FlightBookingSystem fbs) {
-
+    public MainWindow(FlightBookingSystem fbs) throws FlightBookingSystemException, IOException {
+    	
         initialize();
         this.fbs = fbs;
+        this.fbsList = FlightBookingSystemData.load();
     }
     
     public FlightBookingSystem getFlightBookingSystem() {
@@ -133,10 +138,14 @@ public class MainWindow extends JFrame implements ActionListener {
     }	
 
 /* Uncomment the following code to run the GUI version directly from the IDE */
-//    public static void main(String[] args) throws IOException, FlightBookingSystemException {
-//        FlightBookingSystem fbs = FlightBookingSystemData.load();
-//        new MainWindow(fbs);			
-//    }
+    public static void main(String[] args) throws IOException, FlightBookingSystemException {
+        //FlightBookingSystem fbs = FlightBookingSystemData.load();
+    
+    	List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+    	FlightBookingSystem fbs = fbsList.getFirst();
+		
+        new MainWindow(fbs);			
+    }
 
 
 
@@ -145,7 +154,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
         if (ae.getSource() == adminExit) {
             try {
-                FlightBookingSystemData.store(fbs);
+                FlightBookingSystemData.store(fbsList);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
             }

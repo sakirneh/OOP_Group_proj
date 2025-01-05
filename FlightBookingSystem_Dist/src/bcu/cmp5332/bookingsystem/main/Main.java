@@ -6,11 +6,13 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import java.io.*;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) throws IOException, FlightBookingSystemException {
-        
-        FlightBookingSystem fbs = FlightBookingSystemData.load();
+    	List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
+        FlightBookingSystem fbs = fbsList.getFirst();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -30,7 +32,7 @@ public class Main {
                 System.out.println(ex.getMessage());
             }
         }
-        FlightBookingSystemData.store(fbs);
+        FlightBookingSystemData.store(fbsList);
         System.exit(0);
     }
 }

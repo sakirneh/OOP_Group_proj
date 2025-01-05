@@ -43,17 +43,17 @@ public class FlightBookingSystem {
     }
 
     public void addFlight(Flight flight) throws FlightBookingSystemException {
-        if (flights.containsKey(flight.getId())) {
+        if (this.flights.containsKey(flight.getId())) {
             throw new IllegalArgumentException("Duplicate flight ID.");
         }
-        for (Flight existing : flights.values()) {
+        for (Flight existing : this.flights.values()) {
             if (existing.getFlightNumber().equals(flight.getFlightNumber()) 
                 && existing.getDepartureDate().isEqual(flight.getDepartureDate())) {
                 throw new FlightBookingSystemException("There is a flight with same "
                         + "number and departure date in the system");
             }
         }
-        flights.put(flight.getId(), flight);
+        this.flights.put(flight.getId(), flight);
     }
 
     public void addCustomer(Customer customer) {

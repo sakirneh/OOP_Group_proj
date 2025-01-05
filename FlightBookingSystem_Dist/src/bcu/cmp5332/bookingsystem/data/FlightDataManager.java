@@ -12,8 +12,10 @@ import java.util.Scanner;
 
 public class FlightDataManager implements DataManager {
     
-    //private final String RESOURCE = "./resources/data/flights.txt";
-    private final String RESOURCE = "./resources/data/FlightTest.txt";
+	public String RESOURCE;
+	public FlightDataManager(String RESOURCE) {
+		this.RESOURCE = RESOURCE;
+	}
     
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
@@ -36,7 +38,7 @@ public class FlightDataManager implements DataManager {
                     Flight flight = new Flight(id, flightNumber, origin, destination, departureDate,Integer.parseInt(seatCapacity),Float.parseFloat(price));
                     fbs.addFlight(flight);
                 } catch (NumberFormatException ex) {
-                    throw new FlightBookingSystemException("Unable to parse book id " + properties[0] + " on line " + line_idx
+                    throw new FlightBookingSystemException("Unable to parse Flight id " + properties[0] + " on line " + line_idx
                         + "\nError: " + ex);
                 }
                 catch(FlightBookingSystemException ex) {

@@ -2,7 +2,6 @@ package bcu.cmp5332.bookingsystem.data;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
-import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import java.io.BufferedReader;
@@ -15,8 +14,10 @@ import java.util.List;
 
 public class CustomerDataManager implements DataManager {
 
-    //private final String RESOURCE = "./resources/data/customers.txt";
-    private final String RESOURCE = "./resources/data/CustomerTest.txt";
+	public String RESOURCE;
+	public CustomerDataManager(String RESOURCE) {
+		this.RESOURCE = RESOURCE;
+	}
     
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {

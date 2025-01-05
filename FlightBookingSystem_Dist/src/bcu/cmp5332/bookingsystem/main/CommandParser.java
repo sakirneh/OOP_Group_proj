@@ -53,7 +53,7 @@ public class CommandParser {
                 System.out.print("Phone: ");
                 String phoneNum = reader.readLine();
                 
-                System.out.print("Phone: ");
+                System.out.print("Email: ");
                 String email = reader.readLine();
 
                 return new AddCustomer(name, phoneNum,email);
