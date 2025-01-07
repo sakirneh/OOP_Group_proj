@@ -28,6 +28,7 @@ public class Main {
             try {
                 Command command = CommandParser.parse(line);
                 command.execute(fbs);
+                
             } catch (FlightBookingSystemException ex) {
                 System.out.println(ex.getMessage());
             }

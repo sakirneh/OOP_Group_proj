@@ -3,6 +3,8 @@ package bcu.cmp5332.bookingsystem.main;
 import bcu.cmp5332.bookingsystem.commands.LoadGUI;
 import bcu.cmp5332.bookingsystem.commands.ShowCustomer;
 import bcu.cmp5332.bookingsystem.commands.ShowFlight;
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
+import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import bcu.cmp5332.bookingsystem.commands.ListFlights;
 import bcu.cmp5332.bookingsystem.commands.AddBooking;
 import bcu.cmp5332.bookingsystem.commands.AddCustomer;
@@ -18,11 +20,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class CommandParser {
     
     public static Command parse(String line) throws IOException, FlightBookingSystemException {
         try {
+        	
             String[] parts = line.split(" ", 3);
             String cmd = parts[0];
 
@@ -58,6 +62,7 @@ public class CommandParser {
                 String email = reader.readLine();
 
                 return new AddCustomer(name, phoneNum,email);
+                
             } else if (cmd.equals("loadgui")) {
                 return new LoadGUI();
             } else if (parts.length == 1) {

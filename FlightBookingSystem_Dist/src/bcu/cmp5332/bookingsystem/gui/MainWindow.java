@@ -107,7 +107,7 @@ public class MainWindow extends JFrame implements ActionListener, MouseListener 
         
         // adding Bookings menu and menu items
         bookingsMenu = new JMenu("Bookings");
-        
+        menuBar.add(bookingsMenu);
         bookingsIssue = new JMenuItem("Issue");
         bookingsUpdate = new JMenuItem("Update");
         bookingsCancel = new JMenuItem("Cancel");
