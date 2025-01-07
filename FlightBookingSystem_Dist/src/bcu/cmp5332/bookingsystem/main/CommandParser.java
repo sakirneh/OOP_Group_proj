@@ -9,6 +9,7 @@ import bcu.cmp5332.bookingsystem.commands.AddCustomer;
 import bcu.cmp5332.bookingsystem.commands.AddFlight;
 import bcu.cmp5332.bookingsystem.commands.CancelBooking;
 import bcu.cmp5332.bookingsystem.commands.Command;
+import bcu.cmp5332.bookingsystem.commands.EditBooking;
 import bcu.cmp5332.bookingsystem.commands.Help;
 import bcu.cmp5332.bookingsystem.commands.ListCustomers;
 
@@ -82,6 +83,8 @@ public class CommandParser {
                 	return new AddBooking(Integer.valueOf(parts[1]),Integer.valueOf(parts[2]));
                     
                 } else if (cmd.equals("editbooking")) {
+                	 
+                	 return new EditBooking(Integer.valueOf(parts[1]),Integer.valueOf(parts[2]));
                     
                 } else if (cmd.equals("cancelbooking")) {
                     return new CancelBooking(Integer.valueOf(parts[1]),Integer.valueOf(parts[2]));

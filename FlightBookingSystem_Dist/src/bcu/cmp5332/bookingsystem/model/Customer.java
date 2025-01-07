@@ -106,6 +106,16 @@ public class Customer {
     	
     }
     
+    public Booking getBookingByID(int id) throws FlightBookingSystemException{
+    	if(!this.getBookings().contains(this.getBookings().get(id))) {
+    		throw new FlightBookingSystemException("Booking does not exist");
+    	}
+    	else {
+    		return this.getBookings().get(id);
+    	}
+    	
+    }
+    
     public void cancelBookingForFlight(Flight flight) throws FlightBookingSystemException {
     	/* 
     	 * iterates over each booking and checks if any booking has the flight 

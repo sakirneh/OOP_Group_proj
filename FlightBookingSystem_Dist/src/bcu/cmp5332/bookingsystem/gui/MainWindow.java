@@ -260,14 +260,15 @@ public class MainWindow extends JFrame implements ActionListener, MouseListener 
     public void displayCustomers() {
     	List<Customer> customerList = fbs.getCustomers();
     	
-    	String[] columns = new String[]{"Name", "Phone", "Email"};
+    	String[] columns = new String[]{"Name", "Phone", "Email", "Number of bookings"};
     	
-    	Object[][] data = new Object[customerList.size()][3];
+    	Object[][] data = new Object[customerList.size()][4];
         for (int i = 0; i < customerList.size(); i++) {
             Customer customer = customerList.get(i);
             data[i][0] = customer.getName();
             data[i][1] = customer.getPhone();
             data[i][2] = customer.getEmail();
+            data[i][3] = customer.getBookings().size();
             //data[i][3] = flight.getDepartureDate();
             
         }
