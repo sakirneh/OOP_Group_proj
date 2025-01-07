@@ -28,12 +28,17 @@ public class EditBooking implements Command{
 		
 		try {
 			for(Customer customer : fbs.getCustomers()) {
-				if(customer.getBookings().contains(customer.getBookingByID(bookingID -1))) {
-					this.customer = customer;
-					break;
+				if(bookingID > customer.getBookings().size()) {
+					throw new FlightBookingSystemException("Customer has no bookings with given ID");
+				}
+				else if(flightID > fbs.getFlights().size()) {
+					throw new IndexOutOfBoundsException("Flight ID does not exist");
 				}
 				else {
-					throw new FlightBookingSystemException("");
+					if(customer.getBookings().contains(customer.getBookingByID(bookingID -1))) {
+						this.customer = customer;
+						break;
+					}
 				}
 			}
 			
@@ -46,6 +51,9 @@ public class EditBooking implements Command{
 		}
 		catch(FlightBookingSystemException ex){
 			System.out.println(ex.getMessage());
+		}
+		catch(IndexOutOfBoundsException e) {
+			System.out.println(e.getMessage());
 		}
 		
 	}
