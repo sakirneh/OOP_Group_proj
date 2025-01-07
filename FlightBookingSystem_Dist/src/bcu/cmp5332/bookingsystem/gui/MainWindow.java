@@ -2,10 +2,13 @@ package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,8 +21,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class MainWindow extends JFrame implements ActionListener {
+public class MainWindow extends JFrame implements ActionListener, MouseListener {
 
     private JMenuBar menuBar;
     private JMenu adminMenu;
@@ -44,10 +49,14 @@ public class MainWindow extends JFrame implements ActionListener {
     private FlightBookingSystem fbs;
     private List<FlightBookingSystem> fbsList;
     
+    private JTable table;
+    
+    private MainWindow mw;
+    
     
 
     public MainWindow(FlightBookingSystem fbs) throws FlightBookingSystemException, IOException {
-    	
+    	this.mw = mw;
         initialize();
         this.fbs = fbs;
         this.fbsList = FlightBookingSystemData.load();
@@ -67,9 +76,9 @@ public class MainWindow extends JFrame implements ActionListener {
         } catch (Exception ex) {
 
         }
-
+        
         setTitle("Flight Booking Management System");
-
+        this.setLocation(500, 200);
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -162,6 +171,7 @@ public class MainWindow extends JFrame implements ActionListener {
         } else if (ae.getSource() == flightsView) {
             displayFlights();
             
+            
         } else if (ae.getSource() == flightsAdd) {
             new AddFlightWindow(this);
             
@@ -175,10 +185,10 @@ public class MainWindow extends JFrame implements ActionListener {
             
             
         } else if (ae.getSource() == custView) {
-            
+            displayCustomers();
             
         } else if (ae.getSource() == custAdd) {
-            
+            new AddCustomerWindow(this);
             
         } else if (ae.getSource() == custDel) {
             
@@ -200,9 +210,173 @@ public class MainWindow extends JFrame implements ActionListener {
             data[i][3] = flight.getDepartureDate();
         }
 
-        JTable table = new JTable(data, columns);
+        table = new JTable(data, columns);
+        
+        table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int row = table.rowAtPoint(e.getPoint());
+				System.out.println("This is the flights");
+				try {
+					new DisplayFlightPassengers(mw,fbs,row +1);
+				} catch (FlightBookingSystemException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
-    }	
+    }
+    
+    public void displayCustomers() {
+    	List<Customer> customerList = fbs.getCustomers();
+    	
+    	String[] columns = new String[]{"Name", "Phone", "Email"};
+    	
+    	Object[][] data = new Object[customerList.size()][3];
+        for (int i = 0; i < customerList.size(); i++) {
+            Customer customer = customerList.get(i);
+            data[i][0] = customer.getName();
+            data[i][1] = customer.getPhone();
+            data[i][2] = customer.getEmail();
+            //data[i][3] = flight.getDepartureDate();
+            
+        }
+        
+        table = new JTable(data, columns);
+        table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("this is the customers");
+				
+				
+				int row = table.rowAtPoint(e.getPoint());
+				//int col = table.columnAtPoint(e.getPoint());
+				try {
+					new DisplayCustomerBookingDetails(mw,fbs,row +1);
+				} catch (FlightBookingSystemException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        this.getContentPane().removeAll();
+        this.getContentPane().add(new JScrollPane(table));
+        this.revalidate();
+    	
+    }
+    
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		int row = table.rowAtPoint(e.getPoint());
+		int col = table.columnAtPoint(e.getPoint());
+		
+		int selectedRow = table.getSelectedRow();
+		
+		try {
+			Flight flight = fbs.getFlightByID(selectedRow+1);
+			System.out.println("Fligt ID: " + flight.getId() + "Flight Num: " + flight.getFlightNumber());
+			
+			TableModel model = table.getModel();
+			
+			System.out.println(model.getValueAt(selectedRow, col).toString());
+			String out = "";
+			
+			
+			for(int i =0 ; i < model.getColumnCount();i++) {
+				out = out + model.getValueAt(row, i).toString();
+				
+			}
+			System.out.println(out);
+		} catch (FlightBookingSystemException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println("row: " + row);
+		//table.ed
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

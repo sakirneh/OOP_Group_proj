@@ -38,13 +38,17 @@ public class AddBooking implements Command{
 			if(flightBookingSystem.getCustomers().size() >0) {
 				customer = flightBookingSystem.getCustomerByID(customerID);
 				flight = flightBookingSystem.getFlightByID(flightID);
-				Booking booking = new Booking(customer, flight, flightBookingSystem.getSystemDate());
+				
+				int ID = customer.getBookings().size() +1;
+	            
+				Booking booking = new Booking(ID,customer, flight, flightBookingSystem.getSystemDate());
 				
 				try {
 					customer.addBooking(booking);
 					flight.addPassenger(customer);
 					System.out.println("A new Booking has been made for "+ customer.getName());
 					System.out.println(customer.getName() + " was added to flight " + flight.getId());
+					
 				}
 				catch(FlightBookingSystemException ex){
 					System.out.println(ex.getMessage());

@@ -33,8 +33,8 @@ public class CustomerTest {
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
 		
-		
-		Booking booking = new Booking(customer, flight, fbs.getSystemDate());
+		int maxID = customer.getBookings().size() +1;
+		Booking booking = new Booking(maxID,customer, flight, fbs.getSystemDate());
 		customer.addBooking(booking);
 		flight.addPassenger(customer);
 		String testData = "Customer #1\n"
@@ -56,8 +56,8 @@ public class CustomerTest {
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
 		
-		
-		Booking booking = new Booking(customer, flight, fbs.getSystemDate());
+		int maxID = customer.getBookings().size() +1;
+		Booking booking = new Booking(maxID,customer, flight, fbs.getSystemDate());
 		customer.addBooking(booking);
 		flight.addPassenger(customer);
 		assertEquals(1,customer.getBookings().size());
@@ -75,8 +75,8 @@ public class CustomerTest {
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
 		
-		
-		Booking booking = new Booking(customer, flight, fbs.getSystemDate());
+		int maxID = customer.getBookings().size() +1;
+		Booking booking = new Booking(maxID,customer, flight, fbs.getSystemDate());
 		customer.addBooking(booking);
 		flight.addPassenger(customer);
 		customer.cancelBookingForFlight(flight);

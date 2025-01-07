@@ -7,13 +7,16 @@ public class Booking {
     private Customer customer;
     private Flight flight;
     private LocalDate bookingDate;
+    private int bookingID;
     
 
-    public Booking(Customer customer, Flight flight, LocalDate bookingDate) {
+    public Booking(int bookingID,Customer customer, Flight flight, LocalDate bookingDate) {
         // TODO: implementation here
     	this.customer = customer;
     	this.flight = flight;
     	this.bookingDate = bookingDate;
+    	
+    	this.bookingID = bookingID;
         
     }
     
@@ -37,6 +40,14 @@ public class Booking {
     
     public LocalDate getDate() {
     	return this.bookingDate;
+    }
+    
+    public int getBookingID() {
+    	return this.bookingID;
+    }
+    
+    public void setBookingID(int bookingID) {
+    	this.bookingID = bookingID;
     }
     
     public void setLocalBookingDate(LocalDate bookingDate) {

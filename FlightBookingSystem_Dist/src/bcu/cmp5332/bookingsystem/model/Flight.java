@@ -78,6 +78,13 @@ public class Flight {
     public List<Customer> getPassengers() {
         return new ArrayList<>(passengers);
     }
+    /*
+	public List<Customer> getPassengersByID(int id){
+	    if(this.id == id) {
+	    	return
+	    }
+	}
+	*/
     
     public int getSeatCapacity() {
     	return this.seatCapacity;
@@ -94,6 +101,8 @@ public class Flight {
     public void setPrice(Float price) {
     	this.price = price;
     }
+    
+    
     
     
 	

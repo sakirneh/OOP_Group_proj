@@ -53,7 +53,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         setSize(350, 220);
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2));
+        topPanel.setLayout(new GridLayout(7, 2));
         topPanel.add(new JLabel("Flight No : "));
         topPanel.add(flightNoText);
         topPanel.add(new JLabel("Origin : "));
@@ -62,6 +62,10 @@ public class AddFlightWindow extends JFrame implements ActionListener {
         topPanel.add(destinationText);
         topPanel.add(new JLabel("Departure Date (YYYY-MM-DD) : "));
         topPanel.add(depDateText);
+        topPanel.add(new JLabel("SeatCapacity: "));
+        topPanel.add(seatCapacityText);
+        topPanel.add(new JLabel("Price : "));
+        topPanel.add(priceText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
@@ -100,8 +104,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             String flightNumber = flightNoText.getText();
             String origin = originText.getText();
             String destination = destinationText.getText();
-            String seatCapacity = originText.getText();
-            String price = destinationText.getText();
+            String seatCapacity = seatCapacityText.getText();
+            String price = priceText.getText();
             LocalDate departureDate = null;
             try {
                 departureDate = LocalDate.parse(depDateText.getText());
@@ -114,7 +118,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
             mw.displayFlights();
-            // hide (close) the AddFlightWindow
+            // hide (close) the AddFlightWindow  
             this.setVisible(false);
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);

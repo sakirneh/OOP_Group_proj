@@ -34,23 +34,24 @@ public class BookingDataManager implements DataManager {
                 String line = sc.nextLine();
                 String[] properties = line.split(SEPARATOR, -1);
                 try {
-                    int customerID = Integer.parseInt(properties[0]);
-                    String customerName = properties[1];
-                    String customerPhone = properties[2];
+                	int bookingID = Integer.parseInt(properties[0]);
+                    int customerID = Integer.parseInt(properties[1]);
+                    //String customerName = properties[1];
+                    //String customerPhone = properties[2];
                      
                     Customer customer = fbs.getCustomerByID(customerID);
                     
                     
                     
-                    int id = Integer.parseInt(properties[3]);
-                    String flightNumber = properties[4];
-                    String origin = properties[5];
-                    String destination = properties[6];
-                    LocalDate departureDate = LocalDate.parse(properties[7]);
+                    int id = Integer.parseInt(properties[2]);
+                    //String flightNumber = properties[4];
+                    //String origin = properties[5];
+                    //String destination = properties[6];
+                    LocalDate departureDate = LocalDate.parse(properties[3]);
                     //Flight flight = new Flight(id, flightNumber, origin, destination, departureDate);
                     Flight flight = fbs.getFlightByID(id);
                     
-                    Booking booking = new Booking(customer,flight,departureDate);
+                    Booking booking = new Booking(bookingID,customer,flight,departureDate);
                     flight.addPassenger(customer);
                     customer.addBooking(booking);
                     
@@ -77,14 +78,15 @@ public class BookingDataManager implements DataManager {
             	
             	if(customer.getBookings().size() > 0) {
             		for(Booking booking : customer.getBookings()) {
+            			out.print(booking.getBookingID() + SEPARATOR);
             			out.print(booking.getCustomer().getID() + SEPARATOR);
-                        out.print(booking.getCustomer().getName() + SEPARATOR);
-                        out.print(booking.getCustomer().getPhone() + SEPARATOR);
+                        //out.print(booking.getCustomer().getName() + SEPARATOR);
+                        //out.print(booking.getCustomer().getPhone() + SEPARATOR);
                         
                         out.print(booking.getFlight().getId() + SEPARATOR);
-                        out.print(booking.getFlight().getFlightNumber() + SEPARATOR);
-                        out.print(booking.getFlight().getOrigin() + SEPARATOR);
-                        out.print(booking.getFlight().getDestination() + SEPARATOR);
+                        //out.print(booking.getFlight().getFlightNumber() + SEPARATOR);
+                        //out.print(booking.getFlight().getOrigin() + SEPARATOR);
+                        //out.print(booking.getFlight().getDestination() + SEPARATOR);
                         out.print(booking.getFlight().getDepartureDate() + SEPARATOR);
                         out.println();
                 	}
