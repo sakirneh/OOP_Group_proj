@@ -17,18 +17,18 @@ public class CustomerTest {
 	
 	@Test
 	public void testGetDetailShort() throws FlightBookingSystemException, IOException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		
 		assertEquals("Customer #1 -  Name: Abdel-Rahman Tawil - Phone: 07555555555",customer.getDetailsShort());
 	}
 	@Test
 	public void testGetDetailsLong() throws FlightBookingSystemException, IOException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		FlightBookingSystem fbs = new FlightBookingSystem();
 		float price = (float) 100.0;
 		
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price, false);
 		
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
@@ -47,11 +47,11 @@ public class CustomerTest {
 	}
 	@Test
 	public void testAddBooking() throws FlightBookingSystemException, IOException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		FlightBookingSystem fbs = new FlightBookingSystem();
 		float price = (float) 100.0;
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
@@ -66,11 +66,11 @@ public class CustomerTest {
 	
 	@Test
 	public void testCancelBookingForFlight() throws FlightBookingSystemException, IOException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		FlightBookingSystem fbs = new FlightBookingSystem();
 		float price = (float) 100.0;
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		fbs.addCustomer(customer);
 		fbs.addFlight(flight);
@@ -85,7 +85,7 @@ public class CustomerTest {
 	}
 	@Test
 	public void testCustomerStoreData() throws IOException, FlightBookingSystemException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
 		FlightBookingSystem fbs = fbsList.getLast();
 		

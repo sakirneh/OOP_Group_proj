@@ -21,6 +21,8 @@ public class AddFlight implements  Command {
     private Float price;
     private List<FlightBookingSystem> fbsList;
     
+    private boolean isHidden = false;
+    
     public AddFlight(String flightNumber, String origin, String destination, LocalDate departureDate, int seatCapacity, Float price) {
         this.flightNumber = flightNumber;
         this.origin = origin;
@@ -55,7 +57,8 @@ public class AddFlight implements  Command {
             int lastIndex = fbs.getFlights().size() - 1;
             maxId = fbs.getFlights().get(lastIndex).getId();
             
-            Flight flight = new Flight(++maxId, this.flightNumber, this.origin, this.destination, this.departureDate,this.seatCapacity,this.price);
+            Flight flight = new Flight(++maxId, this.flightNumber, this.origin, this.destination, this.departureDate,this.seatCapacity,this.price,isHidden);
+            
             fbs.addFlight(flight);
             System.out.println("Flight #" + flight.getId() + " added.");
             fbsList.set(0, fbs);

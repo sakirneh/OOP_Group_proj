@@ -15,6 +15,7 @@ public class Flight {
     private String origin;
     private String destination;
     private LocalDate departureDate;
+    private boolean isHidden;
 
     private final Set<Customer> passengers;
     
@@ -22,7 +23,7 @@ public class Flight {
     private int seatCapacity;
     private float price;
 
-    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate, int seatCapacity, float price) {
+    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate, int seatCapacity, float price, boolean isHidden) {
         this.id = id;
         this.flightNumber = flightNumber;
         this.origin = origin;
@@ -33,6 +34,8 @@ public class Flight {
         
         this.seatCapacity = seatCapacity;
         this.price = price;
+        
+        this.isHidden = isHidden;
     }
 
     public int getId() {
@@ -102,6 +105,14 @@ public class Flight {
     	this.price = price;
     }
     
+    public void setHiddenValue(boolean bool) {
+    	this.isHidden = bool;
+    }
+    
+    public boolean getHiddenValue() {
+    	return this.isHidden;
+    }
+    
     
     
     
@@ -138,7 +149,14 @@ public class Flight {
 			throw new FlightBookingSystemException("Passenger " + passenger.getName() + " is already present in the flight's list of passengers");
 		}
 		else {
-			this.passengers.add(passenger);
+			if(this.passengers.size() > this.seatCapacity) {
+				throw new FlightBookingSystemException("Flights capacity reached");
+			}
+			else {
+				this.passengers.add(passenger);
+				
+			}
+			
 		}
     	
     }
@@ -148,6 +166,7 @@ public class Flight {
     	
     	if(this.getPassengers().contains(passenger)) {
     		this.passengers.remove(passenger);
+    		
     	}
     	else {
     		throw new FlightBookingSystemException("Passenger " + passenger.getName() + " is not in the flights list of passengers");

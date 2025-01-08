@@ -19,7 +19,20 @@ public class FlightBookingSystem {
 
     public List<Flight> getFlights() {
         List<Flight> out = new ArrayList<>(flights.values());
+        
+    	
         return Collections.unmodifiableList(out);
+    }
+    
+    public List<Flight> getFlightsModifiable() {
+		List<Flight> out = new ArrayList<>();
+    	
+        for(Flight flight : flights.values()) {
+        	if(flight.getHiddenValue() == false) {
+        		out.add(flight);
+        	}
+        }
+        return out;
     }
     
     public List<Customer> getCustomers(){

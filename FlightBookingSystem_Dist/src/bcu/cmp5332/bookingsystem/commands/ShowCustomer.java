@@ -17,8 +17,13 @@ public class ShowCustomer implements Command{
 		// TODO Auto-generated method stub
 		//prints short details about customers
 		if(flightBookingSystem.getCustomers().size() >1) {
-			customer = flightBookingSystem.getCustomerByID(customerID);
-			System.out.println(customer.getDetailsShort());
+			if(flightBookingSystem.getCustomerByID(customerID).getHiddenValue() == false) {
+				customer = flightBookingSystem.getCustomerByID(customerID);
+				System.out.println(customer.getDetailsShort());
+			}
+			else {
+				System.out.println("Customer is hidden");
+			}
 		}
 		else {
 			throw new FlightBookingSystemException("There are no customers with Id " + this.customerID);

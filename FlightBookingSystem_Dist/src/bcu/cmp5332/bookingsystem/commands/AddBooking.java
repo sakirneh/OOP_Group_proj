@@ -41,11 +41,12 @@ public class AddBooking implements Command{
 		*/
 		
 		try{
+			
 			try {
 				fbsList = FlightBookingSystemData.load();
 			} catch (FlightBookingSystemException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Error while loading file " + e.getMessage());
+				System.out.println(e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("The file is either missing or in use");
@@ -60,18 +61,22 @@ public class AddBooking implements Command{
 				Booking booking = new Booking(ID,customer, flight, fbs.getSystemDate());
 				
 				try {
-					customer.addBooking(booking);
-					flight.addPassenger(customer);
-					System.out.println("A new Booking has been made for "+ customer.getName());
-					System.out.println(customer.getName() + " was added to flight " + flight.getId());
-					
-					fbsList.set(0, fbs);
-		        	try {
-		        		FlightBookingSystemData.store(fbsList);
-		        	}
-		        	catch(IOException ex){
-		        		System.out.println("File is either missing or in use");
-		        	}
+					if(flight.getPassengers().size() < flight.getSeatCapacity() || flight.getPassengers().size() < flight.getSeatCapacity()) {
+						customer.addBooking(booking);
+						flight.addPassenger(customer);
+						System.out.println("A new Booking has been made for "+ customer.getName());
+						System.out.println(customer.getName() + " was added to flight " + flight.getId());
+						fbsList.set(0, fbs);
+			        	try {
+			        		FlightBookingSystemData.store(fbsList);
+			        	}
+			        	catch(IOException ex){
+			        		System.out.println("File is either missing or in use");
+			        	}
+					}
+					else {
+						System.out.println("Flight capacity reahced!");
+					}
 					
 				}
 				catch(FlightBookingSystemException ex){

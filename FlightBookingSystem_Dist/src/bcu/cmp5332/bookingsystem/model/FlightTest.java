@@ -16,18 +16,18 @@ public class FlightTest {
 	public void testGetDetailShort() throws FlightBookingSystemException, IOException {
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
 		float price = (float) 100.0;
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		assertEquals("Flight #1 - LH2560 - Birmingham to Munich on 25/11/2022",flight.getDetailsShort());
 	}
 	@Test
 	public void testGetDetailsLong() throws FlightBookingSystemException, IOException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		
 		float price = (float) 100.0;
 		
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		
 		
@@ -47,12 +47,12 @@ public class FlightTest {
 	
 	@Test
 	public void testAddPassengers() throws FlightBookingSystemException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		
 		float price = (float) 100.0;
 		
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		
 		
@@ -63,12 +63,12 @@ public class FlightTest {
 	
 	@Test
 	public void removePassengers() throws FlightBookingSystemException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		
 		float price = (float) 100.0;
 		
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		
 		
@@ -79,12 +79,12 @@ public class FlightTest {
 	
 	@Test(expected = FlightBookingSystemException.class)
 	public void removeFromEmptyPassengerList() throws FlightBookingSystemException {
-		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com");
+		Customer customer = new Customer(1,"Abdel-Rahman Tawil","07555555555","AbdelRahmanTawil@gmail.com",false);
 		
 		float price = (float) 100.0;
 		
 		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price);
+		Flight flight = new Flight(1,"LH2560", "Birmingham","Munich",departureDate,25,price,false);
 		
 		
 		
@@ -95,12 +95,12 @@ public class FlightTest {
 	//if the file already has the same flight - illegalArgumentException exception is thrown, else store the flight correctly
 	@Test
 	public void testStoreFlight() throws FlightBookingSystemException, IOException, IllegalArgumentException {
-		LocalDate departureDate = LocalDate.parse("2022-11-25");
-		float price = (float) 100.0;
+		//LocalDate departureDate = LocalDate.parse("2022-11-25");
+		//float price = (float) 100.0;
 		//Flight flight = new Flight(1, "LH2560","Birmingham", "Munich",departureDate,25,price);
 		
 		List<FlightBookingSystem> fbsList = FlightBookingSystemData.load();
-		FlightBookingSystem fbs = fbsList.getLast();
+		//FlightBookingSystem fbs = fbsList.getLast();
 		
 		
 		FlightBookingSystemData.store(fbsList);

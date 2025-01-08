@@ -14,6 +14,8 @@ public class AddCustomer implements Command {
     private final String phone;
     private final String email;
     private List<FlightBookingSystem> fbsList;
+    
+    private boolean isHidden = false;
 
     public AddCustomer(String name, String phone, String email) {
         this.name = name;
@@ -49,7 +51,7 @@ public class AddCustomer implements Command {
     	int customerID = 0;
     	if(fbs.getCustomers().size() > 0) {
     		customerID = fbs.getCustomers().size() +1;
-    		Customer customer = new Customer(customerID, name, phone,email);
+    		Customer customer = new Customer(customerID, name, phone,email,isHidden);
     		if(fbs.getCustomers().contains(customer)) {
     			throw new FlightBookingSystemException(customer.getName() + " Already exists");
     		}

@@ -12,9 +12,16 @@ public class ListCustomers implements Command {
 	public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
 		// TODO Auto-generated method stub
 		//for each customer print out long customer details 
+		
+		
 		List<Customer> customers = flightBookingSystem.getCustomers();
         for (Customer customer : customers) {
-            System.out.println(customer.getDetailsLong());
+            if(customer.getHiddenValue() == true) {
+            	// do not display customer details, customer is hidden
+            }
+            else {
+            	System.out.println(customer.getDetailsLong());
+            }
         }
         //System.out.println(flights.size() + " flight(s)");
 	}

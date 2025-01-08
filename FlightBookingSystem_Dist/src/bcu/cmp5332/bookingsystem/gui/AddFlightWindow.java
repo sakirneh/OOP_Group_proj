@@ -3,6 +3,8 @@ package bcu.cmp5332.bookingsystem.gui;
 import bcu.cmp5332.bookingsystem.commands.AddFlight;
 import bcu.cmp5332.bookingsystem.commands.Command;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Flight;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,9 +35,12 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
+    
+    private List<Flight> flightListModifiable;
 
-    public AddFlightWindow(MainWindow mw) {
+    public AddFlightWindow(MainWindow mw,List<Flight> flightListModifiable) {
         this.mw = mw;
+        this.flightListModifiable = flightListModifiable;
         initialize();
     }
 
@@ -117,6 +123,10 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate,Integer.valueOf(seatCapacity),Float.valueOf(price));
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
+            
+            
+            //mw.displayFlights(this.flightListModifiable);
+            
             mw.displayFlights();
             // hide (close) the AddFlightWindow  
             this.setVisible(false);

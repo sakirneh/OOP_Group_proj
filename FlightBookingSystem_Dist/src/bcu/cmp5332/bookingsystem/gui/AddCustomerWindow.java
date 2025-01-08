@@ -92,7 +92,7 @@ public class AddCustomerWindow extends JFrame implements ActionListener{
 			String name = nameText.getText();
 			String phone = phoneText.getText();
 			String email = emailText.getText();
-			// create and execute the AddCustomer Command
+			// create and execute the AddCustomer Commandd
 			Command addCustomer = new AddCustomer(name, phone, email);
 			
 			addCustomer.execute(mw.getFlightBookingSystem());

@@ -36,19 +36,19 @@ public class CustomerDataManager implements DataManager {
 						throw new FlightBookingSystemException("Customer data is missing in line : " + lineOut);
 					}
 				}
-				Customer customer = new Customer(Integer.valueOf(values[0]), values[1], values[2],values[3]);
+				Customer customer = new Customer(Integer.valueOf(values[0]), values[1], values[2],values[3],Boolean.valueOf(values[4]));
 				fbs.addCustomer(customer);
 			}
-			in.close();
-		}
-		catch(IOException ex) {
-			System.out.println("File does not exist");
+			
 		}
 		catch(NumberFormatException ex) {
 			throw new FlightBookingSystemException("Unable to parse customer, line" + lineOut);
 		}
 		catch(FlightBookingSystemException ex) {
 			System.out.println(ex.getMessage());
+		}
+		finally {
+			in.close();
 		}
     }
 
@@ -61,6 +61,7 @@ public class CustomerDataManager implements DataManager {
                   out.print(customer.getName() + SEPARATOR);
                   out.print(customer.getPhone() + SEPARATOR);
                   out.print(customer.getEmail() + SEPARATOR);
+                  out.print(customer.getHiddenValue() + SEPARATOR);
                   out.println();
               }
         }

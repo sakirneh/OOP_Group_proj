@@ -14,15 +14,19 @@ public class Customer {
     private String phone;
     private String email;
     
+    private boolean isHidden;
+    
     
     private final List<Booking> bookings = new ArrayList<>();
     
     // TODO: implement constructor here
-    public Customer(int id, String name, String phoneNum, String email) {
+    public Customer(int id, String name, String phoneNum, String email, boolean isHidden) {
     	this.id = id;
     	this.name = name;
     	this.phone = phoneNum;
     	this.email = email;
+    	
+    	this.isHidden = isHidden;
     	
     }
     
@@ -56,6 +60,14 @@ public class Customer {
     
     public void setEmail(String email) {
     	this.email = email;
+    }
+    
+    public void setHiddenValue(boolean bool) {
+    	this.isHidden = bool;
+    }
+    
+    public boolean getHiddenValue() {
+    	return this.isHidden;
     }
     
     

@@ -1,3 +1,4 @@
-1::LH2560::Birmingham::Munich::2022-11-25::25::100.0::
-2::BM3900::Brum::Mun::2023-12-25::50::75.0::
-3::LONBRU12::London::Birmingham::2024-11-11::80::44.0::
+1::LH2560::Birmingham::Munich::2022-11-25::21::100.0::false::
+2::BM3900::Brum::Mun::2023-12-25::25::75.0::false::
+3::LONBRU12::London::Birmingham::2024-11-11::80::44.0::false::
+4::TEstFlight::Origin::Destination::2021-11-12::100::25.0::false::

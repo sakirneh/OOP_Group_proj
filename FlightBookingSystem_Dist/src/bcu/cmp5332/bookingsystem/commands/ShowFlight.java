@@ -16,8 +16,14 @@ public class ShowFlight implements Command{
 		// TODO Auto-generated method stub
 		//prints short details about flights
 		if(flightBookingSystem.getFlights().size() >0 ) {
-			flight = flightBookingSystem.getFlightByID(flightID);
-			System.out.println(flight.getDetailsShort());
+			if(flightBookingSystem.getFlightByID(flightID).getHiddenValue() == false) {
+				flight = flightBookingSystem.getFlightByID(flightID);
+				System.out.println(flight.getDetailsShort());
+			}
+			else {
+				System.out.println("Flight is hidden");
+			}
+			
 		}
 		else {
 			throw new FlightBookingSystemException("There are no flights available with " + this.flightID + " id");
