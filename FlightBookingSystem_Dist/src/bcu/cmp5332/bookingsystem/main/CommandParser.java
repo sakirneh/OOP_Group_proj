@@ -33,18 +33,72 @@ public class CommandParser {
             
             if (cmd.equals("addflight")) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                System.out.print("Flight Number: ");
-                String flighNumber = reader.readLine();
-                System.out.print("Origin: ");
-                String origin = reader.readLine();
-                System.out.print("Destination: ");
-                String destination = reader.readLine();
                 
-                System.out.print("Seat Capacity: ");
-                String seatCapacity = reader.readLine();
-                
-                System.out.print("Price: ");
-                String price = reader.readLine();
+             // Flight Number
+                String flighNumber;
+                try {
+                    System.out.print("Flight Number: ");
+                    flighNumber = reader.readLine();
+                    if (flighNumber.isEmpty()) {
+                        throw new IllegalArgumentException("Flight Number cannot be empty.");
+                    }
+                } catch (IOException e) {
+                    throw new FlightBookingSystemException("Error reading Flight Number.", e);
+                }
+
+                // Origin
+                String origin;
+                try {
+                    System.out.print("Origin: ");
+                    origin = reader.readLine();
+                    if (origin.isEmpty()) {
+                        throw new IllegalArgumentException("Origin cannot be empty.");
+                    }
+                } catch (IOException e) {
+                    throw new FlightBookingSystemException("Error reading Origin.", e);
+                }
+
+                // Destination
+                String destination;
+                try {
+                    System.out.print("Destination: ");
+                    destination = reader.readLine();
+                    if (destination.isEmpty()) {
+                        throw new IllegalArgumentException("Destination cannot be empty.");
+                    }
+                } catch (IOException e) {
+                    throw new FlightBookingSystemException("Error reading Destination.", e);
+                }
+
+                // Seat Capacity
+                int seatCapacity;
+                try {
+                    System.out.print("Seat Capacity: ");
+                    String seatCapacityInput = reader.readLine();
+                    seatCapacity = Integer.parseInt(seatCapacityInput);
+                    if (seatCapacity <= 0) {
+                        throw new IllegalArgumentException("Seat Capacity must be greater than zero.");
+                    }
+                } catch (IOException e) {
+                    throw new FlightBookingSystemException("Error reading Seat Capacity.", e);
+                } catch (NumberFormatException e) {
+                    throw new FlightBookingSystemException("Seat Capacity must be a valid integer.", e);
+                }
+
+                // Price
+                float price;
+                try {
+                    System.out.print("Price: ");
+                    String priceInput = reader.readLine();
+                    price = Float.parseFloat(priceInput);
+                    if (price <= 0) {
+                        throw new IllegalArgumentException("Price must be greater than zero.");
+                    }
+                } catch (IOException e) {
+                    throw new FlightBookingSystemException("Error reading Price.", e);
+                } catch (NumberFormatException e) {
+                    throw new FlightBookingSystemException("Price must be a valid number.", e);
+                }
 
                 LocalDate departureDate = parseDateWithAttempts(reader);
 
