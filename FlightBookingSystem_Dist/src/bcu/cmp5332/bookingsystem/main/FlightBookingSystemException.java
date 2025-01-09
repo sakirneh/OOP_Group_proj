@@ -9,9 +9,9 @@ import java.io.IOException;
  */
 public class FlightBookingSystemException extends Exception {
 
-    public FlightBookingSystemException(String message) {
-        super(message);
-    }
+    	public FlightBookingSystemException(String message) {
+        	super(message);
+    	}
 
 	public FlightBookingSystemException(String string, IOException e) {
 		
